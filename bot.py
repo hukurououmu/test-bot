@@ -40,26 +40,6 @@ async def on_message(message):
                 break
 
     if mode == 2:
-        def wikipediaSearch(text):
-            response_string = ""
-            wikipedia.set_lang("ja")
-            search_response = wikipedia.search(text)
-            if not search_response:
-                response_string = "見つかりませんでした"
-                return response_string
-
-            try:
-                wiki_page = wikipedia.page(search_response[0])
-            except:
-                response_string = "エラーが発生しました"
-                return response_string
-
-            wiki_content = wiki_page.content
-            response_string += wiki_content[0:200] + "......" + "\n"
-            response_string += wiki_page.url
-
-            return response_string
-
         await message.channel.send(wikipediaSearch(msg))
         mode = 0
 
@@ -70,6 +50,28 @@ async def on_message(message):
     if msg == "!wiki":
         mode = 2
         await message.channel.send("調べたいワードを発言してください")
+        
+        
+def wikipediaSearch(text):
+    response_string = ""
+    wikipedia.set_lang("ja")
+    search_response = wikipedia.search(text)
+    
+    if not search_response:
+        response_string = "見つかりませんでした"
+        return response_string
+
+    try:
+         wiki_page = wikipedia.page(search_response[0])
+    except:
+          response_string = "エラーが発生しました"
+          return response_string
+
+     wiki_content = wiki_page.content
+     response_string += wiki_content[0:200] + "......" + "\n"
+     response_string += wiki_page.url
+
+     return response_string
 
 
 client.run(token)
