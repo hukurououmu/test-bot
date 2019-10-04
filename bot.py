@@ -7,7 +7,7 @@ import wikipedia
 from googlesearch import search
 
 
-token = "NTg2NTk2MTMwNDU3MTI0ODk0.XPqUhw.fMt9HzC2rVDz8j9akZ5_98KRg54"
+token = "" #自身のDiscordトークンを設置
 client = discord.Client()
 mode = 0
 city_code = {
